@@ -19,3 +19,6 @@ Route::put('/student/edit/{id}', [StudentController::class, 'update'])->name('st
 
 Route::delete('/student/delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
 
+Route::get('/student/download/{id}', [StudentController::class, 'download'])->name('student.download');
+Route::get('/student/preview/{id}', [StudentController::class, 'preview'])->name('student.preview');
+

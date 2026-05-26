@@ -18,7 +18,7 @@
                     Tambah Siswa
                     <a href="/student" type="button" class="btn btn-danger float-right">Kembali</a>
                 </div>
-                <form action="/student/add" method="POST">
+                <form action="/student/add" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         @if (session('notifikasi'))
@@ -29,40 +29,51 @@
                             </div>
                         @endif
                         <div class="form-group">
-                            <label for="nama">NIM <b class="textdanger">*</b></label>
+                            <label for="nama">NIM <b class="text-danger">*</b></label>
                             <input required placeholder="Masukkan NIM" type="text" id="nim" name="nim"
                                 class="form-control @error('nim') is-invalid
-@enderror" value="{{ old('nim') }}">
+                            @enderror"
+                                value="{{ old('nim') }}">
                             @error('nim')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nama">Nama <b class="textdanger">*</b></label>
+                            <label for="nama">Nama <b class="text-danger">*</b></label>
                             <input required placeholder="Masukkan Nama" type="text" id="nama" name="nama"
                                 class="form-control @error('nama') is-invalid
-@enderror" value="{{ old('nama') }}">
+                            @enderror"
+                                value="{{ old('nama') }}">
                             @error('nama')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="nama">E-Mail <b class="textdanger">*</b></label>
+                            <label for="nama">E-Mail <b class="text-danger">*</b></label>
                             <input required placeholder="Masukkan E-Mail" type="email" id="email" name="email"
                                 class="form-control @error('email') isinvalid @enderror" value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="from">
+                            <label for="foto">Foto <b class="text-danger">*</b></label>
+                            <input type="file" id="foto" name="foto"
+                                class="form-control @error('foto') is-invalid @enderror">
+                            @error('foto')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <div class="form-group">
-                            <label for="nama">Prodi <b class="textdanger">*</b></label>
+                            <label for="nama">Prodi <b class="text-danger">*</b></label>
                             <select required id="prodi" name="prodi"
                                 class="form-control @error('prodi') is-invalid
-@enderror" required>
+                                @enderror"
+                                required>
                                 <option value="">- Pilih Prodi -</option>
                                 <option>Teknik Informatika</option>
                                 <option>Teknik Rekayasa Keamanan Siber</option>
-                                <option>Teknik Rekayasa Perangkat Lunak</option>
+                                <option>Teknologi Rekayasa Perangkat Lunak</option>
                             </select>
                             @error('prodi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -78,13 +89,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('foto').addEventListener('change', function() {
+
+            const file = this.files[0];
+
+            if (file) {
+
+                // validasi tipe file
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+                // validasi ukuran file (2MB)
+                const maxSize = 2 * 1024 * 1024;
+
+                if (!allowedTypes.includes(file.type)) {
+                    alert('File harus JPG, JPEG, atau PNG');
+                    this.value = '';
+                    return;
+                }
+
+                if (file.size > maxSize) {
+                    alert('Ukuran file maksimal 2 MB');
+                    this.value = '';
+                    return;
+                }
+
+            }
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-
-    q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-
-    UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-
-    JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

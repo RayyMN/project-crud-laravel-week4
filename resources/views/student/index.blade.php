@@ -31,7 +31,7 @@
                                 <td>NIM</td>
                                 <td>Nama</td>
                                 <td>Prodi</td>
-                                <td>#</td>
+                                <td>Aksi</td>
                             </thead>
                             <tbody>
                                 @forelse ($students as $index => $data)
@@ -41,15 +41,21 @@
                                         <td>{{ $data->nama }}</td>
                                         <td>{{ $data->prodi }}</td>
                                         <td>
+                                            <img src="{{ asset('storage/' . $data->foto) }}" alt="Foto {{ $data->nama }}" width="100">
+                                        </td>
+                                        <td>
                                             <a href="/student/edit/{{ $data->nim }}"
-                                                class="btn
-btn-sm btn-warning mr-1"><i class="bi bi-search"></i>Edit</a>
+                                                class="btn btn-sm btn-warning mr-1"><i class="bi bi-search"></i>Edit</a>
                                             <form method="POST" action="/student/delete/{{ $data->nim }}">
                                                 @csrf @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger mr-1">Hapus</button>
                                             </form>
+
+                                            <a href="/student/download/{{ $data->nim }}" class="btn btn-sm btn-info mr-1">Download</a>
+                                            <a href="/student/preview/{{ $data->nim }}" class="btn btn-sm btn-secondary mr-1">Preview</a>
                                         </td>
                                     </tr>
+                                    
                                 @empty
                                     <tr>
                                         <td rowspan="100%">Tidak ada data untuk ditampilkan !</td>
