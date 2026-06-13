@@ -31,6 +31,7 @@
                                 <td>NIM</td>
                                 <td>Nama</td>
                                 <td>Prodi</td>
+                                <td>Foto</td>
                                 <td>Aksi</td>
                             </thead>
                             <tbody>
